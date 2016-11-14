@@ -1,4 +1,4 @@
-package cc.superliar.entity;
+package cc.superliar.po;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -12,10 +12,10 @@ import javax.persistence.criteria.Root;
  */
 public class AdminSpecs {
 
-    public  static Specification<Admin> find11(){
-        return new Specification<Admin>() {
+    public  static Specification<User> find11(){
+        return new Specification<User>() {
             @Override
-            public Predicate toPredicate(Root<Admin> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
+            public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 return criteriaBuilder.equal(root.get("account"),"1");
             }
         };

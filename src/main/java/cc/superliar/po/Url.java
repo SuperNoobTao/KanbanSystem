@@ -1,4 +1,4 @@
-package cc.superliar.entity;
+package cc.superliar.po;
 
 /**
  * Created by shentao on 2016/11/7.

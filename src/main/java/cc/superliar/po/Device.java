@@ -1,4 +1,4 @@
-package cc.superliar.entity;
+package cc.superliar.po;
 
 import javax.persistence.Id;
 

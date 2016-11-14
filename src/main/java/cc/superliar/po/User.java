@@ -1,4 +1,4 @@
-package cc.superliar.entity;
+package cc.superliar.po;
 
 import javax.persistence.*;
 
@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "tb_admin")
-public class Admin {
+public class User {
     @Id()
     @Column(name = "admin_id")
     private int id;
@@ -62,7 +62,7 @@ public class Admin {
 
     @Override
     public String toString() {
-        return "Admin{" +
+        return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", account='" + account + '\'' +
@@ -71,6 +71,6 @@ public class Admin {
                 '}';
     }
 
-    public Admin() {
+    public User() {
     }
 }
