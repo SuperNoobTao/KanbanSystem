@@ -1,4 +1,4 @@
- package annotation;
+ package cc.superliar.annotation;
 
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

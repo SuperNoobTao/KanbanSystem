@@ -1,13 +1,14 @@
 package cc.superliar.po;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by shentao on 2016/11/7.
  */
 @Entity
 @Table(name = "tb_admin")
-public class User {
+public class User implements Serializable {
     @Id()
     @Column(name = "admin_id")
     private int id;

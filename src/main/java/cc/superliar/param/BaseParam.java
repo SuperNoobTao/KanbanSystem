@@ -1,6 +1,6 @@
 package cc.superliar.param;
 
-import annotation.SignField;
+import cc.superliar.annotation.SignField;
 import cc.superliar.constant.SignatureConstant;
 import cc.superliar.enums.ErrorType;
 import cc.superliar.exception.CommonsException;
@@ -130,7 +130,7 @@ public class BaseParam implements Serializable {
         }
 
         if (field == null || !field.isAnnotationPresent(SignField.class)) {
-          continue; // Ignore field without ParamField annotation.
+          continue; // Ignore field without ParamField cc.superliar.annotation.
         }
         field.setAccessible(true);
         Object itemValue = field.get(this);

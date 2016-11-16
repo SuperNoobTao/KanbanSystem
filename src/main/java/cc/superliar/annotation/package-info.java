@@ -1,5 +1,5 @@
 /**
- * Package of annotation.
+ * Package of cc.superliar.annotation.
  * <pre>
  *   {@link com.saintdan.framework.annotation.CurrentUser}
  *   Annotate controller param, to get current user info.
@@ -12,4 +12,4 @@
  * @date 9/22/15
  * @since JDK1.8
  */
-package annotation;
+package cc.superliar.annotation;
