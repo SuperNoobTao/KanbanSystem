@@ -32,12 +32,18 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/", "/public/**").permitAll()
-                .antMatchers("/users/**").hasAuthority("ADMIN")
-                .anyRequest().fullyAuthenticated()
+    public void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers(WELCOME_URL).authenticated()
+                .antMatchers(CLIENT_URL).hasAnyAuthority("root", "client")
+                .antMatchers(USER_URL).hasAnyAuthority("root", "user")
+                .antMatchers(ROLE_URL).hasAnyAuthority("root", "role")
+                .antMatchers(GROUP_URL).hasAnyAuthority("root", "group")
+                .antMatchers(RESOURCE_URL).hasAnyAuthority("root", "resource")
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -53,7 +59,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .rememberMe();
     }
-
 
     @Bean
     public AuthenticationProvider authenticationProvider() {
