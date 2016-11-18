@@ -1,7 +1,11 @@
 package cc.superliar.po;
 
+import cc.superliar.enums.ValidFlag;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by shentao on 2016/11/7.
@@ -20,6 +24,13 @@ public class User implements Serializable {
     private String pwd;
     @Column(name = "admin_type")
     private int type;
+    @Column(name = "admin_validflag")
+    private ValidFlag validFlag = ValidFlag.VALID;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
+    @JoinTable(name = "users_has_roles",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")})
+    private Set<Role> roles = new HashSet<>();
 
     public int getId() {
         return id;
@@ -61,6 +72,22 @@ public class User implements Serializable {
         this.type = type;
     }
 
+    public ValidFlag getValidFlag() {
+        return validFlag;
+    }
+
+    public void setValidFlag(ValidFlag validFlag) {
+        this.validFlag = validFlag;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -69,9 +96,17 @@ public class User implements Serializable {
                 ", account='" + account + '\'' +
                 ", pwd='" + pwd + '\'' +
                 ", type=" + type +
+                ", validFlag=" + validFlag +
                 '}';
     }
 
-    public User() {
+    public User(User user) {
+        super();
+        this.id = user.getId();
+        this.name = user.getName();
+        this.account = user.getAccount();
+        this.pwd = user.getPwd();
+        this.type = user.getType();
+        this.validFlag = user.getValidFlag();
     }
 }
