@@ -93,10 +93,7 @@ public class Transformer {
     // Init transformer
     Field idField = type.getDeclaredField(CommonsConstant.ID);
     idField.setAccessible(true);
-    Field createdByField = type.getDeclaredField(CommonsConstant.CREATED_BY);
-    createdByField.setAccessible(true);
-    Field lastModifiedByField = type.getDeclaredField(CommonsConstant.LAST_MODIFIED_BY);
-    lastModifiedByField.setAccessible(true);
+
     Field lastModifiedDateField = type.getDeclaredField(CommonsConstant.LAST_MODIFIED_DATE);
     lastModifiedDateField.setAccessible(true);
     Date now = new Date();
@@ -104,13 +101,10 @@ public class Transformer {
       createdBy = currentUser.getId();
       lastModifiedBy = createdBy;
     } else {
-      createdBy = (int) createdByField.get(po);
       lastModifiedBy = currentUser.getId();
     }
     // Set param.
     BeanUtils.copyPropertiesIgnoreNull(param, po);
-    createdByField.set(po, createdBy);
-    lastModifiedByField.set(po, lastModifiedBy);
     lastModifiedDateField.set(po, now);
     return po;
   }
