@@ -2,6 +2,7 @@ package cc.superliar.po;
 
 
 import cc.superliar.enums.ValidFlag;
+import netscape.security.PrivilegeTable;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -13,6 +14,7 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.security.PrivateKey;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,7 +28,7 @@ import java.util.Set;
  */
 @Entity
 @EntityListeners({AuditingEntityListener.class})
-@Table(name = "resources")
+@Table(name = "tb_resourse")
 public class Resource implements GrantedAuthority, Serializable {
 
   private static final long serialVersionUID = 6298843159549723556L;
@@ -34,67 +36,36 @@ public class Resource implements GrantedAuthority, Serializable {
   @Id
   @SequenceGenerator(name = "resources_seq", sequenceName = "resources_seq", allocationSize = 1)
   @GeneratedValue(generator = "resources_seq", strategy = GenerationType.SEQUENCE)
-  @Column(updatable = false)
+  @Column(name = "resourse_id")
   private Long id;
-
-  @NotEmpty
-  @Column(nullable = false, length = 20)
-  private String name;
-
-  /**
-   * The resource path
-   * <p><b>NOTE: Using ANT path mode</b></p>
-   */
-  @NotEmpty
-  @Column(unique = true, length = 1024, nullable = false)
-  private String path;
-
-  /**
-   * The priority. the smaller the description the higher the priority.
-   */
-  @NotNull
-  @Column(nullable = false)
-  private Integer priority;
-
-  @Column(columnDefinition = "TEXT")
+  @Column(name = "resourse_created_date")
+  private Date createDate;
+  @Column(name = "resourse_description")
   private String description;
-
-  @Column(nullable = false)
-  private ValidFlag validFlag = ValidFlag.VALID;
-
-  @CreatedDate
-  @Column(nullable = false)
-  private Date createdDate = new Date();
-
-  @CreatedBy
-  @Column(nullable = false)
-  private Long createdBy;
-
-  @LastModifiedDate
-  @Column(nullable = false)
-  private Date lastModifiedDate = new Date();
-
-  @LastModifiedBy
-  @Column(nullable = false)
-  private Long lastModifiedBy;
-
-  @Version
-  @Column(nullable = false)
+  @Column(name = "resourse_last_modified_date")
+  private Date lastModifiedDate;
+  @Column(name = "resourse_name")
+  private String name;
+  @Column(name = "resourse_path")
+  private String path;
+  @Column(name = "resourse_priority")
+  private int priority;
+  @Column(name = "resourse_valid_flag")
+  private int validFlag;
+  @Column(name = "resourse_version")
   private int version;
-
-  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "resources", cascade = {CascadeType.REFRESH})
+  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tb_resourse", cascade = {CascadeType.REFRESH})
   private Set<Role> roles = new HashSet<>();
 
   public Resource() {
   }
 
-  public Resource(String name, String path, Integer priority, String description) {
+  public Resource(String name, String path, int priority, String description) {
     this.name = name;
     this.path = path;
     this.priority = priority;
     this.description = description;
   }
-
   @Override
   public String getAuthority() {
     return name;
@@ -106,6 +77,30 @@ public class Resource implements GrantedAuthority, Serializable {
 
   public void setId(Long id) {
     this.id = id;
+  }
+
+  public Date getCreateDate() {
+    return createDate;
+  }
+
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
+
+  public Date getLastModifiedDate() {
+    return lastModifiedDate;
+  }
+
+  public void setLastModifiedDate(Date lastModifiedDate) {
+    this.lastModifiedDate = lastModifiedDate;
   }
 
   public String getName() {
@@ -124,60 +119,20 @@ public class Resource implements GrantedAuthority, Serializable {
     this.path = path;
   }
 
-  public Integer getPriority() {
+  public int getPriority() {
     return priority;
   }
 
-  public void setPriority(Integer priority) {
+  public void setPriority(int priority) {
     this.priority = priority;
   }
 
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public ValidFlag getValidFlag() {
+  public int getValidFlag() {
     return validFlag;
   }
 
-  public void setValidFlag(ValidFlag validFlag) {
+  public void setValidFlag(int validFlag) {
     this.validFlag = validFlag;
-  }
-
-  public Date getCreatedDate() {
-    return createdDate;
-  }
-
-  public void setCreatedDate(Date createdDate) {
-    this.createdDate = createdDate;
-  }
-
-  public Long getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(Long createdBy) {
-    this.createdBy = createdBy;
-  }
-
-  public Date getLastModifiedDate() {
-    return lastModifiedDate;
-  }
-
-  public void setLastModifiedDate(Date lastModifiedDate) {
-    this.lastModifiedDate = lastModifiedDate;
-  }
-
-  public Long getLastModifiedBy() {
-    return lastModifiedBy;
-  }
-
-  public void setLastModifiedBy(Long lastModifiedBy) {
-    this.lastModifiedBy = lastModifiedBy;
   }
 
   public int getVersion() {

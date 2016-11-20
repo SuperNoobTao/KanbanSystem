@@ -2,6 +2,7 @@ package cc.superliar.po;
 
 
 import cc.superliar.enums.ValidFlag;
+import com.sun.xml.internal.rngom.nc.NsNameClass;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
@@ -25,54 +26,35 @@ import java.util.Set;
  */
 @Entity
 @EntityListeners({AuditingEntityListener.class})
-@Table(name = "roles")
-@NamedEntityGraph(name = "Role.groups", attributeNodes = @NamedAttributeNode("groups"))
+@Table(name = "tb_role")
+@NamedEntityGraph(name = "Role.resources", attributeNodes = @NamedAttributeNode("resources"))
 public class Role implements GrantedAuthority, Serializable {
 
   private static final long serialVersionUID = -5193344128221526323L;
 
   @Id
-  @Column(updatable = false)
+  @SequenceGenerator(name = "roles_seq", sequenceName = "roles_seq", allocationSize = 1)
+  @GeneratedValue(generator = "roles_seq", strategy = GenerationType.SEQUENCE)
+  @Column(name = "role_id")
   private Long id;
-
-  @NotEmpty
-  @Column(nullable = false, length = 20)
+  @Column(name = "role_name")
   private String name;
-
-  @Column(columnDefinition = "TEXT")
+  @Column(name = "role_description")
   private String description;
-
-  @Column(nullable = false)
+  @Column(name = "role_created_date")
+  private Date createDate;
+  @Column(name = "role_last_modified_date")
+  private Date lastModifiedDate;
+  @Column(name = "role_valid_flag")
   private ValidFlag validFlag = ValidFlag.VALID;
-
-  @CreatedDate
-  @Column(nullable = false)
-  private Date createdDate = new Date();
-
-  @CreatedBy
-  @Column(nullable = false)
-  private Long createdBy;
-
-  @LastModifiedDate
-  @Column(nullable = false)
-  private Date lastModifiedDate = new Date();
-
-  @LastModifiedBy
-  @Column(nullable = false)
-  private Long lastModifiedBy;
-
-  @Version
-  @Column(nullable = false)
+  @Column(name = "role_version")
   private int version;
-
-  @ManyToMany(fetch = FetchType.LAZY, mappedBy = "roles", cascade = {CascadeType.REFRESH})
-  private Set<User> users = new HashSet<>();
-
   @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
-  @JoinTable(name = "roles_has_resources",
+  @JoinTable(name = "tb_role_has_resourse",
           joinColumns = {@JoinColumn(name = "role_id")},
           inverseJoinColumns = {@JoinColumn(name = "resource_id")})
   private Set<Resource> resources = new HashSet<>();
+
 
   @Override
   public String getAuthority() {
@@ -111,28 +93,12 @@ public class Role implements GrantedAuthority, Serializable {
     this.description = description;
   }
 
-  public ValidFlag getValidFlag() {
-    return validFlag;
+  public Date getCreateDate() {
+    return createDate;
   }
 
-  public void setValidFlag(ValidFlag validFlag) {
-    this.validFlag = validFlag;
-  }
-
-  public Date getCreatedDate() {
-    return createdDate;
-  }
-
-  public void setCreatedDate(Date createdDate) {
-    this.createdDate = createdDate;
-  }
-
-  public Long getCreatedBy() {
-    return createdBy;
-  }
-
-  public void setCreatedBy(Long createdBy) {
-    this.createdBy = createdBy;
+  public void setCreateDate(Date createDate) {
+    this.createDate = createDate;
   }
 
   public Date getLastModifiedDate() {
@@ -143,12 +109,12 @@ public class Role implements GrantedAuthority, Serializable {
     this.lastModifiedDate = lastModifiedDate;
   }
 
-  public Long getLastModifiedBy() {
-    return lastModifiedBy;
+  public ValidFlag getValidFlag() {
+    return validFlag;
   }
 
-  public void setLastModifiedBy(Long lastModifiedBy) {
-    this.lastModifiedBy = lastModifiedBy;
+  public void setValidFlag(ValidFlag validFlag) {
+    this.validFlag = validFlag;
   }
 
   public int getVersion() {
@@ -157,14 +123,6 @@ public class Role implements GrantedAuthority, Serializable {
 
   public void setVersion(int version) {
     this.version = version;
-  }
-
-  public Set<User> getUsers() {
-    return users;
-  }
-
-  public void setUsers(Set<User> users) {
-    this.users = users;
   }
 
   public Set<Resource> getResources() {

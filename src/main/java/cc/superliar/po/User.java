@@ -62,11 +62,16 @@ public class User implements Serializable {
     @Column(name = "user_version")
     private int version;
 
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "tb_role", cascade = {CascadeType.REFRESH})
+    private Set<User> users = new HashSet<>();
+
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.REFRESH})
     @JoinTable(name = "tb_user_has_role",
             joinColumns = {@JoinColumn(name = "user_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> roles = new HashSet<>();
+
+
 
 
     public int getId() {
@@ -157,6 +162,14 @@ public class User implements Serializable {
         this.version = version;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     public Set<Role> getRoles() {
         return roles;
     }
@@ -175,6 +188,15 @@ public class User implements Serializable {
                 ", validFlag=" + validFlag +
                 '}';
     }
+
+    public User(int id,String name, String account, String pwd){
+        this.id = id;
+        this.name = name;
+        this.account = account;
+        this.pwd = pwd;
+    }
+
+
 
     public User(User user) {
         super();
