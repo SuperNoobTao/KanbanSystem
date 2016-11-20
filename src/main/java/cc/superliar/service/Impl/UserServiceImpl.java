@@ -1,6 +1,5 @@
 package cc.superliar.service.Impl;
 
-import cc.superliar.po.User;
 import cc.superliar.service.UserService;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +9,5 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Override
-    public User find(String name) {
-        return null;
-    }
+
 }
