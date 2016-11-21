@@ -189,7 +189,10 @@ public class User implements Serializable {
                 '}';
     }
 
-    public User(int id,String name, String account, String pwd){
+    public User() {
+    }
+
+    public User(int id, String name, String account, String pwd){
         this.id = id;
         this.name = name;
         this.account = account;

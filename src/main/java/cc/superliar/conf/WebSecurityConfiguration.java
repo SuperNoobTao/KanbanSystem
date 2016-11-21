@@ -32,7 +32,33 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers(WELCOME_URL).authenticated()
+                .antMatchers(CLIENT_URL).hasAnyAuthority("root", "client")
+                .antMatchers(USER_URL).hasAnyAuthority("root", "user")
+                .antMatchers(ROLE_URL).hasAnyAuthority("root", "role")
+                .antMatchers(GROUP_URL).hasAnyAuthority("root", "group")
+                .antMatchers(RESOURCE_URL).hasAnyAuthority("root", "resource")
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .defaultSuccessUrl("/home")
+                .failureUrl("/login?error")
+                .usernameParameter("account")
+                .permitAll()
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .deleteCookies("remember-me")
+                .logoutSuccessUrl("/")
+                .permitAll()
+                .and()
+                .rememberMe();
+    }
     @Bean
     public AuthenticationProvider authenticationProvider() {
         return new CustomAuthenticationProvider();

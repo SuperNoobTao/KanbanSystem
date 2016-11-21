@@ -28,7 +28,7 @@ import java.util.Set;
  */
 @Entity
 @EntityListeners({AuditingEntityListener.class})
-@Table(name = "tb_resourse")
+@Table(name = "tb_resource")
 public class Resource implements GrantedAuthority, Serializable {
 
   private static final long serialVersionUID = 6298843159549723556L;
@@ -36,23 +36,23 @@ public class Resource implements GrantedAuthority, Serializable {
   @Id
   @SequenceGenerator(name = "resources_seq", sequenceName = "resources_seq", allocationSize = 1)
   @GeneratedValue(generator = "resources_seq", strategy = GenerationType.SEQUENCE)
-  @Column(name = "resourse_id")
+  @Column(name = "resource_id")
   private Long id;
-  @Column(name = "resourse_created_date")
+  @Column(name = "resource_created_date")
   private Date createDate;
-  @Column(name = "resourse_description")
+  @Column(name = "resource_description")
   private String description;
-  @Column(name = "resourse_last_modified_date")
+  @Column(name = "resource_last_modified_date")
   private Date lastModifiedDate;
-  @Column(name = "resourse_name")
+  @Column(name = "resource_name")
   private String name;
-  @Column(name = "resourse_path")
+  @Column(name = "resource_path")
   private String path;
-  @Column(name = "resourse_priority")
+  @Column(name = "resource_priority")
   private int priority;
-  @Column(name = "resourse_valid_flag")
+  @Column(name = "resource_valid_flag")
   private int validFlag;
-  @Column(name = "resourse_version")
+  @Column(name = "resource_version")
   private int version;
   @ManyToMany(fetch = FetchType.LAZY, mappedBy = "resources", cascade = {CascadeType.REFRESH})
   private Set<Role> roles = new HashSet<>();

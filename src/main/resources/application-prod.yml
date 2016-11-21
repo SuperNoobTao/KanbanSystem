@@ -24,7 +24,7 @@ spring:
         type: com.alibaba.druid.pool.DruidDataSource
         username: postgres
         password: 123wsst
-        url: jdbc:postgresql://localhost:5432/postgres
+        url: jdbc:postgresql://localhost:5432/kanban
         driverClassName: org.postgresql.Driver
         schema: classpath:import.sql
         data: classpath:data.sql
