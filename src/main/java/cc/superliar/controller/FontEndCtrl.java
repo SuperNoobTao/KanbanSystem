@@ -21,13 +21,13 @@ public class FontEndCtrl {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/Public/login");
+        mav.setViewName("/system/login");
         return mav;
     }
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     public ModelAndView index(){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/profile");
+        mav.setViewName("/system/index");
         return mav;
     }
 }
