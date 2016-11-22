@@ -21,7 +21,7 @@ public class FontEndCtrl {
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(){
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/login");
+        mav.setViewName("/Public/login");
         return mav;
     }
     @RequestMapping(value = "/home", method = RequestMethod.GET)

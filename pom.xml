@@ -103,7 +103,10 @@
             <artifactId>specification-arg-resolver</artifactId>
             <version>0.9.0</version>
         </dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
     </dependencies>
 
 	<build>
