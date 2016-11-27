@@ -1,73 +1,120 @@
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html>
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-	<title>ssssssssss</title>
-
-	<link rel="stylesheet" type="text/css" th:href="@{easyui/themes/default/easyui.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{easyui/themes/icon.css}"/>
-	<link rel="stylesheet" type="text/css" th:href="@{css/main.css}"/>
-
-	<script type="text/javascript" th:src="@{js/jquery-1.8.2.min.js}"></script>
-	<script type="text/javascript" th:src="@{easyui/jquery.easyui.min.js}"></script>
-	<script type="text/javascript" th:src="@{easyui/locale/easyui-lang-zh_CN.js}"></script>
-	<script type="text/javascript" th:src="@{js/common.js}"></script>
-	<!--<script type="text/javascript" th:src="@{main.js}"></script>-->
-
+	<meta charset="UTF-8">
+	<title>XXX管理系统</title>
+	<link rel="stylesheet" type="text/css" href="resources/plugins/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="resources/plugins/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<link rel="stylesheet" type="text/css" href="resources/css/default.css">
+	<script type="text/javascript" src="resources/plugins/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="resources/plugins/easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="resources/js/data_cache.js"></script>
+	<script type="text/javascript" src="resources/js/system.js"></script>
+	<style type="text/css">
+		.system_header{height:4%;background:#B3DFDA;padding:10px;line-height:30px;}
+		.system_header{overflow: hidden; height: 30px;background: url(resources/imgs/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;color: #fff; font-family: Verdana,"微软雅黑","黑体";}
+		.system_header .head:hover{cursor: pointer;}
+		.system_nav {padding:0px; margin:0px;list-style:none; float:left; margin-left:40px;color: white;}
+		.system_nav li{ float:left; list-style-type:none;text-align: center;}
+		.system_nav li a{color:#fff; padding-right:20px;}
+		.system_nav li a.active{color:yellow;}
+		.br{border: 1px solid red;}
+	</style>
 </head>
-<body style="border:none;visibility:visible;width: 100%;height: 100%;" onload="showTime();">
-<div id="cc" class="easyui-layout" style="width:100%;height:100%;">
-	<!-- 页面顶部top及菜单栏 -->
-	<div region="north" style="height:96px;width: 100%;">
-		<div class="header" style="background:#fff url('css/images/banner.jpg');">
-			<div style="text-align: right; padding-right: 20px; padding-top: 30px; padding-bottom: 14px;">
-				<span style="color:#FDFDFD" id="loginuserInfo">欢迎你</span>
-				<span style="color:#FDFDFD" id="loginuserArea">ssssssssssssss</span>
-				<span style="color:#FDFDFD" id="timeInfo"></span>
-				<a href="login.jsp" style="color:#FDFDFD;text-decoration:none;">退出</a>
-			</div>
-			<div class="maintitle"  style="top: 12px;font-size:20px;color:#FDFDFD; margin-left:5px;">WEB商务管理系统</div>
-		</div>
-		<div id="topmenu" class="topmenu" style="height:34px;background:url('css/images/maintop.png');color:#fff;font-size:14px;font-weight:bold;">
-			&nbsp;&nbsp;&nbsp;&nbsp;
-			<a href="javascript:addTab('首页','welcome.htm')" >首&nbsp;&nbsp;页</a>
-		</div>
-	</div>
-	<!-- 页面底部信息 -->
-	<div region="south" style="height: 18px;" >
-		<span>asdadsad</span>>
-	</div>
-	<!-- 左侧导航菜单 -->
-	<div region="west"  title="导航菜单栏" style="width:180px;">
-		<ul id="tt1" class="easyui-tree" data-options="animate:true,dnd:true"></ul>
-	</div>
-	<!-- 主显示区域选项卡界面 -->
-	<div region="center">
-		<div style="margin-bottom:10px">
-			<a href="#" class="easyui-linkbutton" onclick="addTab('google','http://www.google.com')">google</a>
-			<a href="#" class="easyui-linkbutton" onclick="addTab('jquery','http://jquery.com/')">jquery</a>
-			<a href="#" class="easyui-linkbutton" onclick="addTab('easyui','http://jeasyui.com/')">easyui</a>
-		</div>
-		<div id="tt" class="easyui-tabs" style="width:400px;height:250px;">
-			<div title="Home">
-			</div>
-		</div>
-	</div>
-	<div id="dd"></div>
-</div>
-<script>
-    function 	addTab(title, url){
-        if ($('#tt').tabs('exists', title)){
-            $('#tt').tabs('select', title);
-        } else {
-            var content = '<iframe scrolling="auto" frameborder="0"  src="'+url+'" style="width:100%;height:100%;"></iframe>';
-            $('#tt').tabs('add',{
-                title:title,
-                content:content,
-                closable:true
-            });
-        }
-    }
-</script>
+<body class="easyui-layout">
+	<div class="system_header" data-options="region:'north',border:false" style="">
+		<span style="float:right; padding-right:20px;height:100%;line-height:30px;" class="head">
+			欢迎您 <span>北纬科技</span>&nbsp;|
+			<span class="editPass">修改密码</span>
+			<span class="loginOut">安全退出</span>
+		</span>
 
+        <span style="padding-left:10px; font-size: 16px; float:left;text-align:center;">
+        	<img src="resources/imgs/blocks.gif" width="20" height="20" align="absmiddle" /> 
+        	XXX管理系统
+        </span>
+
+		<ul id="menu" class="system_nav">
+			<li ><a name="basic" href="javascript:;" title="基础数据">基础数据</a></li>
+			<li><a name="point" href="javascript:;" title="积分管理">积分管理</a></li>
+			<li><a name="easyui" href="javascript:;" title="EasyUI(API)">EasyUI(API)</a></li>
+            <li><a id="bgclock" href="javascript:;" title=""></a></li>
+		</ul>
+	</div>
+	<div data-options="region:'west',split:true,title:'导航菜单'" style="width:15%;">
+		<div id='system_menu' class="easyui-accordion" fit="true" border="false">
+		<!--  导航内容 -->
+		     	
+		</div>
+	</div>
+	<!-- <div data-options="region:'east',split:true,collapsed:true,title:'快捷菜单'" style="width:15%;padding:10px;di">快捷菜单</div> -->
+	<!-- Footer区域 -->
+	<div data-options="region:'south',border:false" style="height:30px;padding:10px;background:#d2e0f2 none repeat scroll 0 0;">
+		<div class="footer"> By 北纬科技 Service@beiweikj.com</div>
+	</div>
+	<div data-options="region:'center',title:''">
+		<div id="tabs" class="easyui-tabs"  fit="true" border="false" >
+			<div title="欢迎使用" style="padding:20px;overflow:hidden;" id="home">
+				
+				<h1>欢迎使用本系统</h1>
+
+			</div>
+		</div>
+	</div>
+	
+
+	<!--修改密码窗口-->
+    <div id="w" class="easyui-window" title="修改密码" collapsible="false" minimizable="false"
+        maximizable="false" icon="icon-save"  style="width: 300px; height: 150px; padding: 5px;
+        background: #fafafa;">
+        <div class="easyui-layout" fit="true">
+            <div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
+                <table cellpadding=3>
+                    <tr>
+                        <td>新密码：</td>
+                        <td><input id="txtNewPass" type="Password" class="txt01" /></td>
+                    </tr>
+                    <tr>
+                        <td>确认密码：</td>
+                        <td><input id="txtRePass" type="Password" class="txt01" /></td>
+                    </tr>
+                </table>
+            </div>
+            <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">
+                <a id="btnEp" class="easyui-linkbutton" icon="icon-ok" href="javascript:void(0)" >
+                    确定</a> <a id="btnCancel" class="easyui-linkbutton" icon="icon-cancel" href="javascript:void(0)">取消</a>
+            </div>
+        </div>
+    </div>
+
+
+	<!-- Tab右键功能菜单初始化 -->
+	<div id="mm" class="easyui-menu" style="width:150px;">
+		<div id="mm-tabupdate">刷新</div>
+		<div class="menu-sep"></div>
+		<div id="mm-tabclose">关闭</div>
+		<div id="mm-tabcloseall">全部关闭</div>
+		<div id="mm-tabcloseother">除此之外全部关闭</div>
+		<div class="menu-sep"></div>
+		<div id="mm-tabcloseright">当前页右侧全部关闭</div>
+		<div id="mm-tabcloseleft">当前页左侧全部关闭</div>
+		<div class="menu-sep"></div>
+		<div id="mm-exit">退出</div>
+	</div>
+	<script type="text/javascript">
+		document.onkeydown = function (e) {
+            var ev = window.event || e;
+            var code = ev.keyCode || ev.which;
+            if (code == 116) {
+                ev.keyCode ? ev.keyCode = 0 : ev.which = 0;
+                cancelBubble = true;
+
+                // $("iframe")[0].location.reload(true);
+                return false;
+            }
+        }
+
+	</script>
 </body>
 </html>

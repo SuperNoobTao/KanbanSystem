@@ -19,15 +19,25 @@ import javax.xml.ws.RequestWrapper;
 public class FontEndCtrl {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(){
+    public ModelAndView login() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/system/login");
+        mav.setViewName("/login");
         return mav;
     }
+
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public ModelAndView index(){
+    public ModelAndView index() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/system/index");
+        mav.setViewName("/index");
         return mav;
     }
+
+    @RequestMapping(value = "/welcome")
+    public ModelAndView casemanage() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/error");
+        return mav;
+    }
+
+
 }

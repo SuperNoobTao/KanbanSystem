@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>用户管理</title>
+	<link rel="stylesheet" type="text/css" href="../../resources/plugins/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/plugins/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/plugins/easyui/themes/color.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../resources/plugins/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="../../resources/plugins/easyui/jquery.easyui.min.js"></script>
+	<style type="text/css">
+		.table_label{width:20%;min-width:150px;}
+		.table_input{width:30%;min-width:250px;}
+	</style>
+</head>
+<body>
+	<div style="margin:20px 0;"></div>
+	<div class="easyui-panel" title="查询条件" style="width:100%;">
+		<div style="padding:10px 10px 20px 10px">
+	    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td class="table_label">菜单名称:</td>
+	    			<td class="table_input"><input class="easyui-textbox" type="text" name="name" data-options="required:true"/></td>
+	    			<td class="table_label">路径名称:</td>
+	    			<td class="table_input"><input class="easyui-textbox" type="text" name="email" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td class="table_label">备注:</td>
+	    			<td class="table_input"><input class="easyui-textbox" name="message" data-options="required:true" /></td>
+	    			<td class="table_label">Language:</td>
+	    			<td class="table_input">
+	    				<select class="easyui-combobox" name="language"><option value="ar">Arabic</option></select>
+	    			</td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div style="text-align:left;padding:5px">
+	    	<a style="width: 80px;" class="easyui-linkbutton c1 l-btn l-btn-small query" href="javascript:void(0)" group="" id="">
+	    		<span class="l-btn-left" style="margin-top: 0px;"><span class="l-btn-text">查询</span></span>
+	    	</a>
+	    	<a style="width: 80px;" class="easyui-linkbutton c5 l-btn l-btn-small cancel" href="javascript:void(0)" group="" id="">
+	    		<span class="l-btn-left" style="margin-top: 0px;"><span class="l-btn-text">清除</span></span>
+	    	</a>
+	    	<a style="width: 80px;" class="easyui-linkbutton c1 l-btn l-btn-small add" href="javascript:void(0)" group="" id="">
+	    		<span class="l-btn-left" style="margin-top: 0px;"><span class="l-btn-text">新增</span></span>
+	    	</a>
+	    </div>
+	    </div>
+	</div>
+	<div style="margin:20px 0;"></div>
+	<table id="dg"></table>
+	<script type="text/javascript">
+		$(function(){
+			$('#dg').datagrid({
+				url: 'datagrid_data1.json',
+				method: 'get',
+				title: '查询结果',
+				iconCls: 'icon-search',
+				width: '100%',
+				height: 250,
+				fitColumns: true,
+				singleSelect: true,
+				frozenColumns:[[
+					{field:'itemid',title:'编号',width:80},
+					{field:'productid',title:'用户名',width:120}
+				]],
+				columns:[[
+					{field:'listprice',title:'邮箱',width:80,align:'right'},
+					{field:'unitcost',title:'角色',width:80,align:'right'},
+					{field:'attr1',title:'权限',width:250},
+					{field:'status',title:'创建时间',width:60,align:'center'},
+					{field:'status',title:'创建人',width:60,align:'center'}
+				]],
+				onHeaderContextMenu: function(e, field){
+					e.preventDefault();
+					if (!cmenu){
+						createColumnMenu();
+					}
+
+					cmenu.menu('show', {
+						left:e.pageX,
+						top:e.pageY
+					});
+				}
+			});
+		});
+		var cmenu;
+		/**
+		 * [createColumnMenu 给列表title添加右键菜单]
+		 * @return {[type]} [description]
+		 */
+		function createColumnMenu(){
+			cmenu = $('<div/>').appendTo('body');
+			cmenu.menu({
+				onClick: function(item){
+					if (item.iconCls == 'icon-ok'){
+						$('#dg').datagrid('hideColumn', item.name);
+						cmenu.menu('setIcon', {
+							target: item.target,
+							iconCls: 'icon-empty'
+						});
+					} else {
+						$('#dg').datagrid('showColumn', item.name);
+						cmenu.menu('setIcon', {
+							target: item.target,
+							iconCls: 'icon-ok'
+						});
+					}
+				}
+			});
+			var fields = $('#dg').datagrid('getColumnFields');
+			for(var i=0; i<fields.length; i++){
+				var field = fields[i];
+				var col = $('#dg').datagrid('getColumnOption', field);
+				cmenu.menu('appendItem', {
+					text: col.title,
+					name: field,
+					iconCls: 'icon-ok'
+				});
+			}
+		}
+	</script>
+</body>
+</html>

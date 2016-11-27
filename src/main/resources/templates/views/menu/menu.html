@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>菜单管理</title>
+	<link rel="stylesheet" type="text/css" href="../../resources/plugins/easyui/themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/plugins/easyui/themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../../resources/plugins/easyui/themes/color.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../resources/plugins/easyui/jquery.min.js"></script>
+	<script type="text/javascript" src="../../resources/plugins/easyui/jquery.easyui.min.js"></script>
+	<style type="text/css">
+		.table_label{width:20%;min-width:150px;}
+		.table_input{width:30%;min-width:250px;}
+	</style>
+</head>
+<body>
+	<div style="margin:20px 0;"></div>
+	<div class="easyui-panel" title="查询条件" style="width:100%;">
+		<div style="padding:10px 10px 20px 10px">
+	    <form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+	    	<table cellpadding="5">
+	    		<tr>
+	    			<td class="table_label">菜单名称:</td>
+	    			<td class="table_input"><input class="easyui-textbox" type="text" name="name" data-options="required:true"/></td>
+	    			<td class="table_label">路径名称:</td>
+	    			<td class="table_input"><input class="easyui-textbox" type="text" name="email" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td class="table_label">备注:</td>
+	    			<td class="table_input"><input class="easyui-textbox" name="message" data-options="required:true" /></td>
+	    			<td class="table_label">Language:</td>
+	    			<td class="table_input">
+	    				<select class="easyui-combobox" name="language"><option value="ar">Arabic</option></select>
+	    			</td>
+	    		</tr>
+	    	</table>
+	    </form>
+	    <div style="text-align:left;padding:5px">
+	    	<a style="width: 118px;" class="easyui-linkbutton c1 l-btn l-btn-small" href="#" group="" id="">
+	    		<span class="l-btn-left" style="margin-top: 0px;"><span class="l-btn-text">查询</span></span>
+	    	</a>
+	    	<a style="width: 118px;" class="easyui-linkbutton c5 l-btn l-btn-small" href="#" group="" id="">
+	    		<span class="l-btn-left" style="margin-top: 0px;"><span class="l-btn-text">清除</span></span>
+	    	</a>
+	    </div>
+	    </div>
+	</div>
+
+	<div style="margin:20px 0;"></div>
+	
+	<table class="easyui-datagrid" title="查询结果" style="width:100%;height:250px"
+			data-options="singleSelect:true,collapsible:true,url:'datagrid_data1.json',method:'get'">
+		<thead data-options="frozen:true">
+			<tr>
+				<th data-options="field:'itemid',width:100">菜单编号</th>
+				<th data-options="field:'productid',width:120">菜单名称</th>
+			</tr>
+		</thead>
+		<thead>
+			<tr>
+				<th data-options="field:'listprice',width:80,align:'center'">菜单编号</th>
+				<th data-options="field:'unitcost',width:80,align:'center'">菜单名称</th>
+				<th data-options="field:'attr1',width:250,align:'center'">文件映射</th>
+				<th data-options="field:'attr1',width:250,align:'center'">父菜单</th>
+				<th data-options="field:'attr1',width:250,align:'center'">创建时间</th>
+				<th data-options="field:'attr1',width:250,align:'center'">创建人</th>
+			</tr>
+		</thead>
+	</table>
+
+	<script>
+		function submitForm(){
+			$('#ff').form('submit',{
+				onSubmit:function(){
+					return $(this).form('enableValidation').form('validate');
+				}
+			});
+		}
+		function clearForm(){
+			$('#ff').form('clear');
+		}
+	</script>
+</body>
+</html>
