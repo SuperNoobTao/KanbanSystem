@@ -28,7 +28,7 @@ public class User implements Serializable {
     @SequenceGenerator(name = "users_seq", sequenceName = "users_seq", allocationSize = 1)
     @GeneratedValue(generator = "users_seq", strategy = GenerationType.SEQUENCE)
     @Column(name = "user_id")
-    private int id;
+    private Long id;
 
     @Column(name = "user_name")
     private String name;
@@ -74,11 +74,11 @@ public class User implements Serializable {
 
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -192,7 +192,7 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(int id, String name, String account, String pwd){
+    public User(Long id, String name, String account, String pwd){
         this.id = id;
         this.name = name;
         this.account = account;

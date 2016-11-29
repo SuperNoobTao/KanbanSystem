@@ -31,6 +31,8 @@ public class DeviceParam extends BaseParam{
     @Size(min = 4, max = 50)
     private String num; // num
 
+    private String urlIds; // url ids string
+
     private String description;
 
     public DeviceParam() {}
@@ -77,6 +79,14 @@ public class DeviceParam extends BaseParam{
 
     public void setNum(String num) {
         this.num = num;
+    }
+
+    public String getUrlIds() {
+        return urlIds;
+    }
+
+    public void setUrlIds(String urlIds) {
+        this.urlIds = urlIds;
     }
 
     public String getDescription() {

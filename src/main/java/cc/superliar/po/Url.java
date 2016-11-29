@@ -20,17 +20,17 @@ public class Url {
     @SequenceGenerator(name = "urls_seq", sequenceName = "urls_seq", allocationSize = 1)
     @GeneratedValue(generator = "urls_seq", strategy = GenerationType.SEQUENCE)
     @Column(name = "url_id")
-    private int id;
+    private Long id;
     @Column(name = "url_content")
     private String content;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "urls", cascade = {CascadeType.REFRESH})
     private Set<Device> devices = new HashSet<>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

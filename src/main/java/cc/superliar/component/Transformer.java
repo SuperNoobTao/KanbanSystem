@@ -88,8 +88,8 @@ public class Transformer {
    */
   public <T> T param2PO(Class<T> type, Object param, T po, User currentUser) throws Exception {
     // Init createdBy, lastModifiedBy
-    int createdBy;
-    int lastModifiedBy;
+    Long createdBy;
+    Long lastModifiedBy;
     // Init transformer
     Field idField = type.getDeclaredField(CommonsConstant.ID);
     idField.setAccessible(true);
