@@ -1,120 +1,63 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="UTF-8">
-	<title>XXX管理系统</title>
-	<link rel="stylesheet" type="text/css" href="resources/plugins/easyui/themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" href="resources/plugins/easyui/themes/icon.css">
-	<link rel="stylesheet" type="text/css" href="../demo.css">
-	<link rel="stylesheet" type="text/css" href="resources/css/default.css">
-	<script type="text/javascript" src="resources/plugins/easyui/jquery.min.js"></script>
-	<script type="text/javascript" src="resources/plugins/easyui/jquery.easyui.min.js"></script>
-	<script type="text/javascript" src="resources/js/data_cache.js"></script>
-	<script type="text/javascript" src="resources/js/system.js"></script>
-	<style type="text/css">
-		.system_header{height:4%;background:#B3DFDA;padding:10px;line-height:30px;}
-		.system_header{overflow: hidden; height: 30px;background: url(resources/imgs/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;color: #fff; font-family: Verdana,"微软雅黑","黑体";}
-		.system_header .head:hover{cursor: pointer;}
-		.system_nav {padding:0px; margin:0px;list-style:none; float:left; margin-left:40px;color: white;}
-		.system_nav li{ float:left; list-style-type:none;text-align: center;}
-		.system_nav li a{color:#fff; padding-right:20px;}
-		.system_nav li a.active{color:yellow;}
-		.br{border: 1px solid red;}
-	</style>
+    <title>Please wait...</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" th:href="@{css/animate.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{libs/easyui/themes/bootstrap/easyui.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{libs/easyui/themes/bootstrap/app.css}"/>
+    <script type="text/javascript" th:src="@{libs/jquery-2.1.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{libs/easyui/jquery.easyui.min.js}"></script>
 </head>
 <body class="easyui-layout">
-	<div class="system_header" data-options="region:'north',border:false" style="">
-		<span style="float:right; padding-right:20px;height:100%;line-height:30px;" class="head">
-			欢迎您 <span>北纬科技</span>&nbsp;|
-			<span class="editPass">修改密码</span>
-			<span class="loginOut">安全退出</span>
-		</span>
-
-        <span style="padding-left:10px; font-size: 16px; float:left;text-align:center;">
-        	<img src="resources/imgs/blocks.gif" width="20" height="20" align="absmiddle" /> 
-        	XXX管理系统
-        </span>
-
-		<ul id="menu" class="system_nav">
-			<li ><a name="basic" href="javascript:;" title="基础数据">基础数据</a></li>
-			<li><a name="point" href="javascript:;" title="积分管理">积分管理</a></li>
-			<li><a name="easyui" href="javascript:;" title="EasyUI(API)">EasyUI(API)</a></li>
-            <li><a id="bgclock" href="javascript:;" title=""></a></li>
-		</ul>
-	</div>
-	<div data-options="region:'west',split:true,title:'导航菜单'" style="width:15%;">
-		<div id='system_menu' class="easyui-accordion" fit="true" border="false">
-		<!--  导航内容 -->
-		     	
-		</div>
-	</div>
-	<!-- <div data-options="region:'east',split:true,collapsed:true,title:'快捷菜单'" style="width:15%;padding:10px;di">快捷菜单</div> -->
-	<!-- Footer区域 -->
-	<div data-options="region:'south',border:false" style="height:30px;padding:10px;background:#d2e0f2 none repeat scroll 0 0;">
-		<div class="footer"> By 北纬科技 Service@beiweikj.com</div>
-	</div>
-	<div data-options="region:'center',title:''">
-		<div id="tabs" class="easyui-tabs"  fit="true" border="false" >
-			<div title="欢迎使用" style="padding:20px;overflow:hidden;" id="home">
-				
-				<h1>欢迎使用本系统</h1>
-
-			</div>
-		</div>
-	</div>
-	
-
-	<!--修改密码窗口-->
-    <div id="w" class="easyui-window" title="修改密码" collapsible="false" minimizable="false"
-        maximizable="false" icon="icon-save"  style="width: 300px; height: 150px; padding: 5px;
-        background: #fafafa;">
-        <div class="easyui-layout" fit="true">
-            <div region="center" border="false" style="padding: 10px; background: #fff; border: 1px solid #ccc;">
-                <table cellpadding=3>
-                    <tr>
-                        <td>新密码：</td>
-                        <td><input id="txtNewPass" type="Password" class="txt01" /></td>
-                    </tr>
-                    <tr>
-                        <td>确认密码：</td>
-                        <td><input id="txtRePass" type="Password" class="txt01" /></td>
-                    </tr>
-                </table>
-            </div>
-            <div region="south" border="false" style="text-align: right; height: 30px; line-height: 30px;">
-                <a id="btnEp" class="easyui-linkbutton" icon="icon-ok" href="javascript:void(0)" >
-                    确定</a> <a id="btnCancel" class="easyui-linkbutton" icon="icon-cancel" href="javascript:void(0)">取消</a>
-            </div>
+    <div id="app-header" data-options="region:'north'" style="height:40px; color:#fefefe; border:0; overflow:hidden;">
+        <div style="float:left; width:150px;">
+            <h1 class="app-logo" data-init="config['system.appname']"></h1>
+        </div>
+        <ul style="float:left;">
+            <li><a href="/" target="_blank" title="查看前台主页"><i class="fa fa-home"></i> 回首页</a></li>
+            <li><a href="javascript:void(0);" id="fullscreen" title="全屏" onclick="$(document).toggleFullScreen();" style="display:none;"><i class="fa fa-expand"></i></a></li>
+        </ul>
+        <ul style="float:right;">
+            <li><a href="javascript:opentab('user/profile','个人中心');" title="个人信息"><i class="fa fa-user"></i> <label data-init="user['UserName']">&nbsp;</label>, <label>欢迎回来！</label></a></li>
+            <li><a href="javascript:void(0);" id="clearCache" title="更新缓存"><i class="fa fa-refresh"></i> 缓存更新</a></li>
+            <li><a href="login.html" title="安全退出"><i class="fa fa-sign-out"></i> 退出登录</a></li>
+        </ul>
+    </div>
+    <div data-options="region:'west'" title="功能导航" style="width:150px;">
+        <div id="nav" class="easyui-panel" style="height: 100%; border: 0"
+             data-options="href:'html/navigation/accordion.html'">
         </div>
     </div>
-
-
-	<!-- Tab右键功能菜单初始化 -->
-	<div id="mm" class="easyui-menu" style="width:150px;">
-		<div id="mm-tabupdate">刷新</div>
-		<div class="menu-sep"></div>
-		<div id="mm-tabclose">关闭</div>
-		<div id="mm-tabcloseall">全部关闭</div>
-		<div id="mm-tabcloseother">除此之外全部关闭</div>
-		<div class="menu-sep"></div>
-		<div id="mm-tabcloseright">当前页右侧全部关闭</div>
-		<div id="mm-tabcloseleft">当前页左侧全部关闭</div>
-		<div class="menu-sep"></div>
-		<div id="mm-exit">退出</div>
-	</div>
-	<script type="text/javascript">
-		document.onkeydown = function (e) {
-            var ev = window.event || e;
-            var code = ev.keyCode || ev.which;
-            if (code == 116) {
-                ev.keyCode ? ev.keyCode = 0 : ev.which = 0;
-                cancelBubble = true;
-
-                // $("iframe")[0].location.reload(true);
-                return false;
-            }
-        }
-
-	</script>
+    <div data-options="region:'center'">
+        <div id="mainTabs" class="easyui-tabs" data-options="fit:true,border:false">
+            <div title="起始页" data-options="href:'html/portal/layout.html'" style="padding:10px; overflow-x:hidden;"></div>
+            <div title="日程安排" data-options="href:'html/user/calendar.html'"></div>
+        </div>
+    </div>
+    <div data-options="region:'south'" style="height:30px; padding:5px 10px;">
+        <div style="float: left;">
+            <span id="app-status">Ready</span>
+        </div>
+        <div style="float:right;">
+            当前版本：<label>v1.0</label>
+        </div>
+    </div>
+    <div class="ajax-loadding"><i class="fa fa-spinner fa-pulse"></i> 正在处理，请稍候......</div>
+    <div id="dlg-main"></div>
+    <div id="mainTabMenus" class="easyui-menu" style="width:150px;">  
+        <div name="close">关闭</div>  
+        <div name="All">全部关闭</div>
+        <div name="Other">除此之外全部关闭</div>  
+    </div> 
+    <script type="text/javascript" th:src="@{libs/jquery.fullscreen-min.js}"></script>
+    <script type="text/javascript" th:src="@{api/init.json}"></script>
+    <script type="text/javascript" th:src="@{app.js}"></script>
+    <script type="text/javascript" th:src="@{libs/easyui/locale/easyui-lang-zh_CN.js}"></script>
+    <script type="text/javascript" th:src="@{libs/easyui/ux.js}"></script>
 </body>
 </html>
+
+
+

@@ -15,7 +15,7 @@ server:
 
 spring:
     thymeleaf:
-        cache: true
+        cache: false
 
     jade4j:
         caching: true
