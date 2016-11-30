@@ -29,7 +29,8 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         UsernamePasswordAuthenticationToken token  = (UsernamePasswordAuthenticationToken) authentication;
-        // Find user.
+        // Find
+        // user.
         String username = token.getName();
         User user = userRepo.findByAccountAndValidFlag(username, ValidFlag.VALID).orElseThrow(
                 // Throw cannot find any user by this usr param.

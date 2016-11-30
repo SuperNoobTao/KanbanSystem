@@ -29,6 +29,8 @@ public class Device {
     private int screenSize;
     @Column(name = "device_screen_num")
     private int screenNum;
+    @Column(name = "device_styleid")
+    private int styleid;
     @CreatedDate
     @Column(name = "device_created_date")
     private Date createdDate;
@@ -86,6 +88,14 @@ public class Device {
 
     public void setScreenNum(int screenNum) {
         this.screenNum = screenNum;
+    }
+
+    public int getStyleid() {
+        return styleid;
+    }
+
+    public void setStyleid(int styleid) {
+        this.styleid = styleid;
     }
 
     public Date getCreatedDate() {

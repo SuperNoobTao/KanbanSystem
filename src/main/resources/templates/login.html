@@ -1,18 +1,14 @@
-﻿
-
-
-<!DOCTYPE html>
-
-<html>
+﻿<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>登录 | web+</title>
-    <meta charset="utf-8">
+    <title>登录</title>
+    <meta charset="utf-8"/>
     <link href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <!--<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />-->
-    <link href="css/animate.css" rel="stylesheet" type="text/css" />
-    <link href="css/app.css" rel="stylesheet" type="text/css" />
-    <link href="libs/iCheck/square/blue.css" rel="stylesheet" type="text/css" />
+    <link th:href="@{css/animate.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{css/app.css}" rel="stylesheet" type="text/css" />
+    <link th:href="@{libs/iCheck/square/blue.css}" rel="stylesheet" type="text/css" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -55,18 +51,19 @@
                     <!-- /.col -->
                 </div>
 </form>
-            <a href="#">忘记密码？</a><br>
+            <a href="#">忘记密码？</a>
+
 
         </div>
         <!-- /.login-box-body -->
     </div>
     <!-- /.login-box -->
     <!-- jQuery 2.2.3 -->
-    <script src="libs/jquery-2.1.4.min.js"></script>
+    <script th:src="@{libs/jquery-2.1.4.min.js}"></script>
     <!-- Bootstrap 3.3.6 -->
-    <script src="libs/bootstrap.min.js"></script>
+    <script th:src="@{libs/bootstrap.min.js}"></script>
     <!-- iCheck -->
-    <script src="libs/iCheck/icheck.min.js"></script>
+    <script th:src="@{libs/iCheck/icheck.min.js}"></script>
     <script>
       $(function () {
         $('input').iCheck({

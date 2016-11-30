@@ -1,5 +1,6 @@
 package cc.superliar.conf;
 
+import cc.superliar.conf.custom.AccessHandler;
 import cc.superliar.conf.custom.CustomAuthenticationProvider;
 import cc.superliar.constant.ResourceURL;
 import cc.superliar.constant.VersionConstant;
@@ -43,7 +44,6 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/static", "/static/api/**", "/static/api").permitAll()
                 .antMatchers(WELCOME_URL).authenticated()
                 .antMatchers(CLIENT_URL).hasAnyAuthority("root", "client")
                 .antMatchers(USER_URL).hasAnyAuthority("root", "user")
@@ -53,9 +53,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/home")
-                .failureUrl("/login?error")
                 .usernameParameter("account")
+                .successHandler(new AccessHandler())
+                .failureHandler(new AccessHandler()).permitAll().and().logout()
                 .permitAll()
                 .and()
                 .logout()
