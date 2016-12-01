@@ -35,7 +35,7 @@ public class FontEndCtrl {
     @RequestMapping(value = "/welcome")
     public ModelAndView casemanage() {
         ModelAndView mav = new ModelAndView();
-        mav.setViewName("/error");
+        mav.setViewName("/index");
         return mav;
     }
 
